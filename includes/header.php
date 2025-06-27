@@ -24,12 +24,17 @@
                 <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                <?php if(isset($_SESSION['auth_user'])):?>
+                <li><a href="#" class="nav-link px-2 text-white"><?=$_SESSION['auth_user']['user_fname']?></a></li>
+                <?php endif;?>
             </ul>
 
             <div class="text-end">
                 <a href="<?= base_url('login.php') ?>" class="btn btn-outline-light me-2">Login</a>
                 <a href="<?= base_url('register.php') ?>" class="btn btn-warning">Sign-up</a>
+                <form action="" method="post">
+                    <button type="submit" name="logout-btn" class="btn btn-warning">Logout</button>
+                </form>
             </div>
         </div>
     </div>
