@@ -11,7 +11,6 @@ class DBConnection{
             die ("Connection failed: " . $i->getMessage());
         }
 
-        echo "Connected successfully";
         return $this->conn = $conn;
     }
 }

@@ -1,7 +1,8 @@
 <?php
-include("config/app.php");
+
 include("controllers/RegisterController.php");
 include("controllers/LoginController.php");
+
 
 $auth = new LoginController;
 
@@ -13,16 +14,19 @@ if(isset($_POST["logout-btn"])){
 }
 
 
-if(isset($_POST["login-btn"])){
+if(isset($_POST["login-btn"])) {
     $email = $_POST["email"];
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $pass = $_POST["pass"];
 
-    $checkLogin = $auth->userLogin($email, $pass);
+    $login = new LoginController;
+    $checkLogin = $login->userLogin($email, $pass);
     if($checkLogin){
         redirect('Logged in successfully', 'index.php');
+        exit; // Important to prevent further execution
     }else{
         redirect('Invalid Email or Password', 'login.php');
+        exit;
     }
 }
 
@@ -57,7 +61,7 @@ if(isset($_POST["register-btn"])){
             if($register_query){
                 redirect("Something went wrong", "register.php");
             }else{
-                redirect("Registered successfully", "register.php");
+                redirect("Registered successfully", "login.php");
             }
         }
     }else{

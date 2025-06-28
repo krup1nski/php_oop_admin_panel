@@ -14,6 +14,9 @@ $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 include_once('DBConnection.php');
 $db = new DBConnection;
 
+include("codes/authentication.php");
+
+
 function base_url($slug)
 {
     echo SITE_URL.$slug;

@@ -24,17 +24,29 @@
                 <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <?php if(isset($_SESSION['auth_user'])):?>
-                <li><a href="#" class="nav-link px-2 text-white"><?=$_SESSION['auth_user']['user_fname']?></a></li>
-                <?php endif;?>
+
             </ul>
 
             <div class="text-end">
+                <?php if(isset($_SESSION['auth_user'])):?>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?=$_SESSION['auth_user']['user_fname']?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= base_url('profile.php') ?>">Profile</a></li>
+                            <li>
+                                <form action="" method="post">
+                                    <button type="submit"  name="logout-btn" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                <?php else:?>
+
                 <a href="<?= base_url('login.php') ?>" class="btn btn-outline-light me-2">Login</a>
                 <a href="<?= base_url('register.php') ?>" class="btn btn-warning">Sign-up</a>
-                <form action="" method="post">
-                    <button type="submit" name="logout-btn" class="btn btn-warning">Logout</button>
-                </form>
+                <?php endif;?>
             </div>
         </div>
     </div>
