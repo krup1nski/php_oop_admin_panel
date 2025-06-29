@@ -1,5 +1,8 @@
 <?php
+include("config/app.php");
 include_once("controllers/AuthenticationController.php");
+include("codes/authentication.php");
+$authentication = new AuthenticationController;
 $data = $authentication->authUserDetail();
 
 include("includes/header.php");

@@ -11,10 +11,8 @@ $charset = 'utf8mb4';
 $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,];
 
-include_once('DBConnection.php');
+require_once('DBConnection.php');
 $db = new DBConnection;
-
-include("codes/authentication.php");
 
 
 function base_url($slug)

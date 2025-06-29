@@ -14,7 +14,7 @@ class LoginController{
 
         if ($user && password_verify($pass, $user['pass'])) {
             $this->userAuthentication($user);
-            return true;
+            return $user;
         }
         return false;
     }

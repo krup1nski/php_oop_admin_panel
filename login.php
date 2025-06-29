@@ -1,6 +1,7 @@
 <?php
-
 include("config/app.php");
+include("codes/authentication.php");
+
 $auth->isLoggedIn();
 
 

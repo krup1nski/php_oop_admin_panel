@@ -3,7 +3,6 @@
 include("controllers/RegisterController.php");
 include("controllers/LoginController.php");
 
-
 $auth = new LoginController;
 
 if(isset($_POST["logout-btn"])){
@@ -22,11 +21,14 @@ if(isset($_POST["login-btn"])) {
     $login = new LoginController;
     $checkLogin = $login->userLogin($email, $pass);
     if($checkLogin){
-        redirect('Logged in successfully', 'index.php');
-        exit; // Important to prevent further execution
+        if($checkLogin["role"] == "1"){
+            redirect('Logged in successfully', 'admin/index.php');
+        }else{
+            redirect('Logged in successfully', 'index.php');
+        }
+
     }else{
         redirect('Invalid Email or Password', 'login.php');
-        exit;
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-include("config/app.php");
+
 class AuthenticationController
 {
     public function __construct()
@@ -24,7 +24,7 @@ class AuthenticationController
         if($checkAuth){
             $user_id = $_SESSION['auth_user']['user_id'];
 
-            $getUserData = $this->conn->prepare("SELECT * FROM users WHERE id = ?");
+            $getUserData = $this->conn->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
             $getUserData->execute([$user_id]);
 
             if($getUserData->rowCount() > 0){
@@ -39,7 +39,14 @@ class AuthenticationController
         }
     }
 
+    public function isAdmin(){
+        $checkAdmin = $this->conn->prepare("SELECT * FROM users WHERE id = ? AND role = 1 LIMIT 1");
+        $checkAdmin->execute([$_SESSION['auth_user']['user_id']]);
+        if($checkAdmin->rowCount() > 0){
+            return true;
+        }else{
+            redirect('You are not admin', 'index.php');
+        }
+    }
 
 }
-
-$authentication = new AuthenticationController;
